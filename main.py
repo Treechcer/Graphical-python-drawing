@@ -113,5 +113,6 @@ def keyhandler(lastpress):
     else:
         lastpress = ""
     return lastpress
-    
-main()
+
+if __name__ == "__main__":
+    main()
