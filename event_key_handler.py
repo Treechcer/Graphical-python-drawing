@@ -1,7 +1,7 @@
 import pygame
 from classes import Point, Square
 
-def eventhandler(lastpress, event, objPoint, objSquare, squares, points, window):
+def eventhandler(lastpress, event, objPoint, objSquare, squares, points, triangles, objTriangle, window):
     lastShape = ""
     if event.type == pygame.MOUSEBUTTONDOWN and lastpress == "a" or lastpress == "ay":
         pos = pygame.mouse.get_pos()
@@ -13,6 +13,12 @@ def eventhandler(lastpress, event, objPoint, objSquare, squares, points, window)
         objSquare.set_x(pos[0])
         objSquare.set_y(pos[1])
         lastShape = "square"
+    elif event.type == pygame.MOUSEBUTTONDOWN and lastpress == "d" or lastpress == "dy":
+        pos = pygame.mouse.get_pos()
+        objTriangle.set_x(pos[0])
+        objTriangle.set_y(pos[1])
+        objTriangle.pixelchange(objTriangle.color)
+        lastShape = "triangle"
     elif lastpress == "qa":
         objPoint.add_to_color((1, 0, 0))
         objPoint.point_draw()
@@ -41,7 +47,6 @@ def eventhandler(lastpress, event, objPoint, objSquare, squares, points, window)
     elif lastpress == "F4":
         if points:
             points.pop()
-        print(points)
     if lastShape == "square" and lastpress == "sy":
         objSquare = Square(pos[0], pos[1], window, size=10)
         squares.append(objSquare)
@@ -50,8 +55,12 @@ def eventhandler(lastpress, event, objPoint, objSquare, squares, points, window)
         objPoint = Point(pos[0], pos[1], window)
         points.append(objPoint)
         lastShape = ""
+    elif lastShape == "triangle" and lastpress == "dy":
+        objTriangle = Point(pos[0], pos[1], window)
+        points.append(objTriangle)
+        lastShape = ""
 
-    return squares, points
+    return squares, points, triangles
 
 import pygame
 
@@ -67,7 +76,10 @@ def keyhandler(lastpress, event, keys_pressed):
         keys_pressed["sy"] = True 
     elif keys[pygame.K_a] and keys[pygame.K_y] and not keys_pressed.get("ay", False):
         lastpress = "ay"
-        keys_pressed["ay"] = True 
+        keys_pressed["ay"] = True
+    elif keys[pygame.K_d] and keys[pygame.K_y] and not keys_pressed.get("dy", False):
+        lastpress = "dy"
+        keys_pressed["dy"] = True 
     elif keys[pygame.K_q] and keys[pygame.K_a]:
         lastpress = "qa"
     elif keys[pygame.K_w] and keys[pygame.K_a]:
@@ -84,6 +96,8 @@ def keyhandler(lastpress, event, keys_pressed):
         lastpress = "a"
     elif keys[pygame.K_s]:
         lastpress = "s"
+    elif keys[pygame.K_d]:
+        lastpress = "d"
     else:
         lastpress = ""
 
@@ -103,5 +117,7 @@ def keyhandler(lastpress, event, keys_pressed):
             keys_pressed["F4"] = False
         if event.key == pygame.K_F3 and keys_pressed.get("F3", False):
             keys_pressed["F3"] = False
+        if event.key == pygame.K_y and keys_pressed.get("dy", False):
+            keys_pressed["dy"] = False
 
     return lastpress, keys_pressed

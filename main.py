@@ -1,5 +1,5 @@
 import pygame
-from classes import Point, Square
+from classes import Point, Square, Triangle
 from event_key_handler import eventhandler, keyhandler
 
 def main():
@@ -15,6 +15,9 @@ def main():
     keys_pressed = {}
     points = []
     squares = []
+    triangles = []
+
+    objTriangle = Triangle(-100,-100, window)
 
     objPoint = Point(-10, -10, window)
     objPoint.point_draw()
@@ -32,14 +35,16 @@ def main():
                 running = False
 
         lastpress, keys_pressed = keyhandler(lastpress, event, keys_pressed)
-        squares, points = eventhandler(lastpress, event, objPoint, objSquare, squares, points, window)
+        triangles, squares, points = eventhandler(lastpress, event, objPoint, objSquare, squares, points, triangles, objTriangle, window)
 
         window.fill((255, 255, 255))
         
-        for ob in points:
-            ob.point_draw()
-        for ob in squares:
-            ob.point_draw()
+        for po in points:
+            po.point_draw()
+        for sq in squares:
+            sq.point_draw()
+        for tr in triangles:
+            tr.point_draw()
 
         pygame.display.flip()
         clock.tick(60)
