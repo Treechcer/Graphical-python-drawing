@@ -1,5 +1,5 @@
 import pygame
-from point import Point, Square
+from classes import Point, Square
 from event_key_handler import eventhandler, keyhandler
 
 def main():
