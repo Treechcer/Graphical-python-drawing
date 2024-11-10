@@ -38,6 +38,7 @@ Expanding interactive control options and real-time parameter adjustments.
 
 ## Screenshot
 ![Screenshot](screenshot_folder/screenshot1)
+- This demonstrates the ability to create multiple shapes with all colors.
 
 ## Requirements:
 [Pygame](https://www.pygame.org/wiki/GettingStarted)
