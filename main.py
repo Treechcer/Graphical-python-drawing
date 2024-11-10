@@ -11,11 +11,19 @@ def main():
     clock = pygame.time.Clock()
 
     lastpress = ""
+
+    keys_pressed = {}
+    points = []
+    squares = []
+
     objPoint = Point(-10, -10, window)
     objPoint.point_draw()
 
     objSquare = Square(-50, -50, window, size=10)
     objSquare.point_draw()
+
+    points.append(objPoint)
+    squares.append(objSquare)
 
     running = True
     while running:
@@ -23,11 +31,17 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        lastpress = keyhandler(lastpress)
-        eventhandler(lastpress, event, objPoint, objSquare)
+        lastpress, keys_pressed = keyhandler(lastpress, event, keys_pressed)
+        squares, points = eventhandler(lastpress, event, objPoint, objSquare, squares, points, window)
+
+        window.fill((255, 255, 255))
+        
+        for ob in points:
+            ob.point_draw()
+        for ob in squares:
+            ob.point_draw()
+
         pygame.display.flip()
-        objPoint.point_draw()
-        objSquare.point_draw()
         clock.tick(60)
 
 if __name__ == "__main__":

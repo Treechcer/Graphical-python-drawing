@@ -1,6 +1,6 @@
 import pygame
 
-class inh:
+class DrawableObject:
     def get_x(self):
         return self.x
 
@@ -63,7 +63,7 @@ class inh:
     def __str__(self):
         return f"this object has: x = {self.x}, y = {self.y}, color = {self.color}, state = {self.state}, windows = {self.window}"
 
-class Point(inh):
+class Point(DrawableObject):
     def __init__(self, x, y, window, color=(0,0,0), state=False):
         self.x = x
         self.y = y
@@ -81,7 +81,7 @@ class Point(inh):
                 self.window.set_at((self.x + dx, self.y + dy), color)
         return self
 
-class Square(Point):
+class Square(DrawableObject):
     def __init__(self, x, y, window, size=6, color=(0,0,0), state=False):
         self.x = x
         self.y = y
