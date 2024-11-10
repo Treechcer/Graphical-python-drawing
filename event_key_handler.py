@@ -27,10 +27,18 @@ def eventhandler(lastpress, event, objPoint, objSquare):
     elif lastpress == "es":
         objSquare.add_to_color((0, 0, 1))
         objSquare.point_draw()
+    elif lastpress == "+":
+        objSquare.add_to_size()
+    elif lastpress == "-":
+        objSquare.sub_to_size()
 
 def keyhandler(lastpress):
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_q] and keys[pygame.K_a]:
+    if keys[pygame.K_F1]:
+        lastpress = "+"
+    elif keys[pygame.K_F2]:
+        lastpress = "-"
+    elif keys[pygame.K_q] and keys[pygame.K_a]:
         lastpress = "qa"
     elif keys[pygame.K_w] and keys[pygame.K_a]:
         lastpress = "wa"
