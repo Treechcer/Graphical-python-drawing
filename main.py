@@ -1,5 +1,5 @@
 import pygame
-from point import Point
+from point import Point, Square
 from event_key_handler import eventhandler, keyhandler
 
 def main():
@@ -8,10 +8,14 @@ def main():
     window = pygame.display.set_mode(window_size)
     pygame.display.set_caption("Graphical Test")
     window.fill((255, 255, 255))
+    clock = pygame.time.Clock()
 
     lastpress = ""
-    bod = Point(-10, -10, window)
-    bod.point_draw()
+    objPoint = Point(-10, -10, window)
+    objPoint.point_draw()
+
+    objSquare = Square(-50, -50, window)
+    objSquare.point_draw()
 
     running = True
     while running:
@@ -20,8 +24,9 @@ def main():
                 running = False
 
         lastpress = keyhandler(lastpress)
-        eventhandler(lastpress, event, bod)
+        eventhandler(lastpress, event, objPoint, objSquare)
         pygame.display.flip()
+        clock.tick(60)
 
 if __name__ == "__main__":
     main()
