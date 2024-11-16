@@ -41,13 +41,12 @@ def eventhandler(lastpress, event, objPoint, objSquare, squares, points, window)
     elif lastpress == "F4":
         if points:
             points.pop()
-        print(points)
     if lastShape == "square" and lastpress == "sy":
-        objSquare = Square(pos[0], pos[1], window, size=10)
+        objSquare = Square(pos[0], pos[1], window, color = objSquare.color, size=10)
         squares.append(objSquare)
         lastShape = ""
     elif lastShape == "point" and lastpress == "ay":
-        objPoint = Point(pos[0], pos[1], window)
+        objPoint = Point(pos[0], pos[1], window, color = objPoint.color)
         points.append(objPoint)
         lastShape = ""
 
